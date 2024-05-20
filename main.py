@@ -14,8 +14,10 @@ if not os.path.exists(csv_file_path):
         writer = csv.writer(file)
         writer.writerow(["timestamp", "value"])
 
+
 class ValueModel(BaseModel):
     value: float
+
 
 @app.post("/add_value/")
 async def add_value(value: ValueModel):
@@ -27,6 +29,7 @@ async def add_value(value: ValueModel):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.get("/download_csv/")
 async def download_csv():
     try:
@@ -34,6 +37,8 @@ async def download_csv():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+    uvicorn.run(app, host="0.0.0.0", port=8080)
